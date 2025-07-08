@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\KeranjangItem;
 use App\Models\Produk;
+use App\Http\Resources\ProdukResource;
 
 class KeranjangController extends Controller
 {
@@ -17,6 +18,11 @@ class KeranjangController extends Controller
         $items = KeranjangItem::with('produk')
             ->where('user_id', $user->id)
             ->get();
+        // Ubah produk menjadi ProdukResource agar gambar_utama_url selalu ada
+        $items = $items->map(function ($item) {
+            $item->produk = $item->produk ? new ProdukResource($item->produk) : null;
+            return $item;
+        });
         return response()->json($items);
     }
 

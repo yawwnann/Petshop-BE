@@ -60,133 +60,134 @@ class PetShopSeeder extends Seeder
 
         // Data Produks
         $produks = [
-            // Makanan Hewan
+            // Makanan Kucing
             [
                 'kategori_produk_id' => 1,
-                'nama_produk' => 'Royal Canin Kitten',
-                'slug' => 'royal-canin-kitten',
-                'deskripsi' => 'Makanan kucing kitten dengan nutrisi lengkap untuk pertumbuhan optimal.',
-                'harga' => 150000,
-                'stok' => 50,
-                'status_ketersediaan' => 'Tersedia',
-                'jenis_kelamin' => null,
-                'umur_bulan' => null,
-                'warna' => null,
-                'ras' => null,
-            ],
-            [
-                'kategori_produk_id' => 1,
-                'nama_produk' => 'Pedigree Adult Dog',
-                'slug' => 'pedigree-adult-dog',
-                'deskripsi' => 'Makanan anjing dewasa dengan protein tinggi untuk kesehatan optimal.',
-                'harga' => 120000,
+                'nama_produk' => 'Whiskas Adult Tuna 1.2kg',
+                'slug' => 'whiskas-adult-tuna-1-2kg',
+                'deskripsi' => 'Makanan kucing dewasa rasa tuna, kaya vitamin dan mineral untuk bulu sehat dan pencernaan optimal.',
+                'harga' => 95000,
                 'stok' => 40,
                 'status_ketersediaan' => 'Tersedia',
-                'jenis_kelamin' => null,
-                'umur_bulan' => null,
-                'warna' => null,
-                'ras' => null,
+                'gambar_utama' => 'https://images.unsplash.com/photo-1518717758536-85ae29035b6d?auto=format&fit=crop&w=400&q=80',
             ],
             [
                 'kategori_produk_id' => 1,
-                'nama_produk' => 'Vitakraft Hamster Food',
-                'slug' => 'vitakraft-hamster-food',
-                'deskripsi' => 'Makanan hamster dengan biji-bijian dan nutrisi seimbang.',
-                'harga' => 45000,
+                'nama_produk' => 'Me-O Persian Adult 1.1kg',
+                'slug' => 'meo-persian-adult-1-1kg',
+                'deskripsi' => 'Makanan kucing khusus Persia, membantu mengurangi hairball dan menjaga kesehatan bulu.',
+                'harga' => 88000,
                 'stok' => 30,
                 'status_ketersediaan' => 'Tersedia',
-                'jenis_kelamin' => null,
-                'umur_bulan' => null,
-                'warna' => null,
-                'ras' => null,
+                'gambar_utama' => 'https://images.unsplash.com/photo-1518715308788-3005759c61d3?auto=format&fit=crop&w=400&q=80',
             ],
-            // Aksesoris
             [
-                'kategori_produk_id' => 2,
-                'nama_produk' => 'Kalung Anjing Premium',
-                'slug' => 'kalung-anjing-premium',
-                'deskripsi' => 'Kalung anjing dengan bahan kulit berkualitas tinggi.',
-                'harga' => 85000,
+                'kategori_produk_id' => 1,
+                'nama_produk' => 'Royal Canin Kitten 2kg',
+                'slug' => 'royal-canin-kitten-2kg',
+                'deskripsi' => 'Makanan kucing kitten dengan nutrisi lengkap untuk pertumbuhan optimal dan daya tahan tubuh.',
+                'harga' => 210000,
                 'stok' => 25,
                 'status_ketersediaan' => 'Tersedia',
-                'jenis_kelamin' => null,
-                'umur_bulan' => null,
-                'warna' => 'Coklat',
-                'ras' => null,
+                'gambar_utama' => 'https://images.unsplash.com/photo-1518715308788-3005759c61d3?auto=format&fit=crop&w=400&q=80',
+            ],
+            [
+                'kategori_produk_id' => 1,
+                'nama_produk' => 'Pro Plan Adult Salmon 1.5kg',
+                'slug' => 'pro-plan-adult-salmon-1-5kg',
+                'deskripsi' => 'Makanan kucing dewasa premium dengan salmon asli, mendukung sistem imun dan kesehatan ginjal.',
+                'harga' => 230000,
+                'stok' => 20,
+                'status_ketersediaan' => 'Tersedia',
+                'gambar_utama' => 'https://images.unsplash.com/photo-1518717758536-85ae29035b6d?auto=format&fit=crop&w=400&q=80',
+            ],
+            [
+                'kategori_produk_id' => 1,
+                'nama_produk' => 'Friskies Seafood Sensations 1.1kg',
+                'slug' => 'friskies-seafood-sensations-1-1kg',
+                'deskripsi' => 'Makanan kering kucing dengan rasa seafood, lezat dan bergizi untuk kucing aktif.',
+                'harga' => 67000,
+                'stok' => 35,
+                'status_ketersediaan' => 'Tersedia',
+                'gambar_utama' => 'https://images.unsplash.com/photo-1518715308788-3005759c61d3?auto=format&fit=crop&w=400&q=80',
+            ],
+            [
+                'kategori_produk_id' => 1,
+                'nama_produk' => 'Bolt Tuna Cat Food 1kg',
+                'slug' => 'bolt-tuna-cat-food-1kg',
+                'deskripsi' => 'Makanan kucing ekonomis dengan rasa tuna, cocok untuk semua usia.',
+                'harga' => 42000,
+                'stok' => 50,
+                'status_ketersediaan' => 'Tersedia',
+                'gambar_utama' => 'https://images.unsplash.com/photo-1518717758536-85ae29035b6d?auto=format&fit=crop&w=400&q=80',
+            ],
+            // Perlengkapan Kucing
+            [
+                'kategori_produk_id' => 2,
+                'nama_produk' => 'Tempat Makan Kucing Stainless',
+                'slug' => 'tempat-makan-kucing-stainless',
+                'deskripsi' => 'Tempat makan kucing berbahan stainless steel, anti slip dan mudah dibersihkan.',
+                'harga' => 35000,
+                'stok' => 30,
+                'status_ketersediaan' => 'Tersedia',
+                'gambar_utama' => 'https://images.unsplash.com/photo-1518715308788-3005759c61d3?auto=format&fit=crop&w=400&q=80',
             ],
             [
                 'kategori_produk_id' => 2,
-                'nama_produk' => 'Tali Anjing Retractable',
-                'slug' => 'tali-anjing-retractable',
-                'deskripsi' => 'Tali anjing yang bisa ditarik dengan panjang maksimal 5 meter.',
-                'harga' => 95000,
-                'stok' => 20,
+                'nama_produk' => 'Litter Box Kucing Jumbo',
+                'slug' => 'litter-box-kucing-jumbo',
+                'deskripsi' => 'Kotak pasir kucing ukuran besar, nyaman dan mudah dibersihkan.',
+                'harga' => 78000,
+                'stok' => 18,
                 'status_ketersediaan' => 'Tersedia',
-                'jenis_kelamin' => null,
-                'umur_bulan' => null,
-                'warna' => 'Hitam',
-                'ras' => null,
+                'gambar_utama' => 'https://images.unsplash.com/photo-1518717758536-85ae29035b6d?auto=format&fit=crop&w=400&q=80',
             ],
-            // Kandang & Tempat Tidur
             [
-                'kategori_produk_id' => 3,
-                'nama_produk' => 'Kandang Kucing 3 Lantai',
-                'slug' => 'kandang-kucing-3-lantai',
-                'deskripsi' => 'Kandang kucing dengan 3 lantai dan aksesoris lengkap.',
-                'harga' => 450000,
-                'stok' => 10,
+                'kategori_produk_id' => 2,
+                'nama_produk' => 'Mainan Kucing Bola Bell',
+                'slug' => 'mainan-kucing-bola-bell',
+                'deskripsi' => 'Bola mainan dengan lonceng di dalamnya, cocok untuk melatih aktifitas kucing.',
+                'harga' => 15000,
+                'stok' => 60,
                 'status_ketersediaan' => 'Tersedia',
-                'jenis_kelamin' => null,
-                'umur_bulan' => null,
-                'warna' => 'Putih',
-                'ras' => null,
+                'gambar_utama' => 'https://images.unsplash.com/photo-1518715308788-3005759c61d3?auto=format&fit=crop&w=400&q=80',
             ],
-            // Mainan
             [
-                'kategori_produk_id' => 4,
-                'nama_produk' => 'Mainan Kucing Laser Pointer',
-                'slug' => 'mainan-kucing-laser-pointer',
-                'deskripsi' => 'Laser pointer untuk bermain dengan kucing, aman dan menyenangkan.',
-                'harga' => 35000,
-                'stok' => 35,
-                'status_ketersediaan' => 'Tersedia',
-                'jenis_kelamin' => null,
-                'umur_bulan' => null,
-                'warna' => 'Merah',
-                'ras' => null,
-            ],
-            // Perawatan
-            [
-                'kategori_produk_id' => 5,
-                'nama_produk' => 'Shampoo Anjing Anti Kutu',
-                'slug' => 'shampoo-anjing-anti-kutu',
-                'deskripsi' => 'Shampoo khusus anjing dengan formula anti kutu dan menyehatkan bulu.',
-                'harga' => 75000,
-                'stok' => 30,
-                'status_ketersediaan' => 'Tersedia',
-                'jenis_kelamin' => null,
-                'umur_bulan' => null,
-                'warna' => null,
-                'ras' => null,
-            ],
-            // Vitamin & Suplemen
-            [
-                'kategori_produk_id' => 6,
-                'nama_produk' => 'Vitamin Kucing NutriGel',
-                'slug' => 'vitamin-kucing-nutrigel',
-                'deskripsi' => 'Vitamin kucing dalam bentuk gel yang mudah dikonsumsi.',
-                'harga' => 65000,
+                'kategori_produk_id' => 2,
+                'nama_produk' => 'Sisir Bulu Kucing',
+                'slug' => 'sisir-bulu-kucing',
+                'deskripsi' => 'Sisir khusus bulu kucing, membantu mengurangi rontok dan menjaga bulu tetap halus.',
+                'harga' => 22000,
                 'stok' => 40,
                 'status_ketersediaan' => 'Tersedia',
-                'jenis_kelamin' => null,
-                'umur_bulan' => null,
-                'warna' => null,
-                'ras' => null,
+                'gambar_utama' => 'https://images.unsplash.com/photo-1518717758536-85ae29035b6d?auto=format&fit=crop&w=400&q=80',
             ],
         ];
 
         foreach ($produks as $produk) {
             Produk::create($produk);
+        }
+
+        // Upload gambar dari Pixabay ke Cloudinary untuk setiap produk jika gambar_utama masih kosong
+        foreach (\App\Models\Produk::whereNull('gambar_utama')->orWhere('gambar_utama', '')->get() as $produk) {
+            try {
+                $pixabayKey = env('PIXABAY_API_KEY');
+                $query = urlencode($produk->nama_produk . ' cat');
+                $response = \Illuminate\Support\Facades\Http::get("https://pixabay.com/api/?key={$pixabayKey}&q={$query}&image_type=photo&per_page=3");
+                $hits = $response->json('hits');
+                $imageUrl = $hits[0]['webformatURL'] ?? null;
+                if ($imageUrl) {
+                    $upload = \CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary::uploadApi()->upload($imageUrl, [
+                        'folder' => 'petshop/produk'
+                    ]);
+                    $cloudinaryUrl = $upload['secure_url'] ?? null;
+                    if ($cloudinaryUrl) {
+                        $produk->update(['gambar_utama' => $cloudinaryUrl]);
+                    }
+                }
+            } catch (\Exception $e) {
+                echo "Gagal upload gambar untuk produk {$produk->nama_produk}: {$e->getMessage()}\n";
+            }
         }
     }
 }

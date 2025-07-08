@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\ProdukController;
 use App\Http\Controllers\Api\PesananApiController;
 use App\Http\Controllers\Api\PaymentProofController;
 use App\Http\Controllers\Api\UserProfileController;
+use App\Http\Controllers\Api\KonsultasiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,6 +64,10 @@ Route::middleware('auth:api')->group(function () {
     Route::post('/pesanan/{pesanan}/submit-payment-proof', [PaymentProofController::class, 'submitProof'])
         ->name('api.pesanan.submitProof');
     Route::put('/pesanan/{pesanan}/tandai-selesai', [PesananApiController::class, 'tandaiSelesai'])->name('api.pesanan.tandaiSelesai');
+
+    // --- Manajemen Konsultasi ---
+    Route::get('/konsultasi', [KonsultasiController::class, 'index']);
+    Route::post('/konsultasi', [KonsultasiController::class, 'store']);
 
     // == API Endpoints Keranjang ==
     Route::get('/keranjang', [\App\Http\Controllers\Api\KeranjangController::class, 'index']);

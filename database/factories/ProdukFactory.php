@@ -29,13 +29,6 @@ class ProdukFactory extends Factory
             'stok' => $this->faker->numberBetween(1, 50),
             'status_ketersediaan' => $this->faker->randomElement(['Tersedia', 'Habis']),
             'gambar_utama' => null,
-            'jenis_kelamin' => $this->faker->randomElement(['Jantan', 'Betina']),
-            'umur_bulan' => $this->faker->numberBetween(1, 60),
-            'warna' => $this->faker->randomElement(['Putih', 'Hitam', 'Coklat', 'Abu-abu', 'Orange', 'Campuran']),
-            'ras' => $this->faker->randomElement(['Persia', 'Angora', 'Siam', 'Maine Coon', 'British Shorthair', 'Ragdoll']),
-            'merk' => $this->faker->company(),
-            'berat_volume' => $this->faker->randomFloat(2, 0.1, 10) . ' kg',
-            'expired' => $this->faker->optional()->date(),
         ];
     }
 }

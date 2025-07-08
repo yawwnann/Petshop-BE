@@ -69,42 +69,48 @@ class DatabaseSeeder extends Seeder
             $kategoriList = KategoriProduk::factory(6)->create();
             $this->command->info('Kategori dibuat.');
 
-            // Buat produk dengan kategori yang sudah ada
-            $produkList = collect();
-            foreach ($kategoriList as $kategori) {
-                $produks = Produk::factory(rand(3, 8))->create([
-                    'kategori_produk_id' => $kategori->id
-                ]);
-                // Ambil gambar dari Pixabay dan upload ke Cloudinary
-                foreach ($produks as $produk) {
-                    try {
-                        $pixabayKey = env('PIXABAY_API_KEY');
-                        $query = urlencode($produk->nama_produk);
-                        $response = Http::get("https://pixabay.com/api/?key={$pixabayKey}&q={$query}&image_type=photo&per_page=3");
-                        $hits = $response->json('hits');
-                        $imageUrl = $hits[0]['webformatURL'] ?? null;
-                        if ($imageUrl) {
-                            $upload = Cloudinary::uploadApi()->upload($imageUrl, [
-                                'folder' => 'petshop/produk'
-                            ]);
-                            $cloudinaryUrl = $upload['secure_url'] ?? null;
-                            if ($cloudinaryUrl) {
-                                $produk->update(['gambar_utama' => $cloudinaryUrl]);
-                            }
-                        }
-                    } catch (\Exception $e) {
-                        $this->command->warn('Gagal upload gambar untuk produk ' . $produk->nama_produk . ': ' . $e->getMessage());
-                    }
-                }
-                $produkList = $produkList->merge($produks);
-            }
-            $this->command->info('Produks dibuat dan gambar diupload.');
+            // Komentari/hapus blok berikut agar produk tidak random:
+            // // Buat produk dengan kategori yang sudah ada
+            // $produkList = collect();
+            // foreach ($kategoriList as $kategori) {
+            //     $produks = Produk::factory(rand(3, 8))->create([
+            //         'kategori_produk_id' => $kategori->id
+            //     ]);
+            //     // Ambil gambar dari Pixabay dan upload ke Cloudinary
+            //     foreach ($produks as $produk) {
+            //         try {
+            //             $pixabayKey = env('PIXABAY_API_KEY');
+            //             $query = urlencode($produk->nama_produk);
+            //             $response = Http::get("https://pixabay.com/api/?key={$pixabayKey}&q={$query}&image_type=photo&per_page=3");
+            //             $hits = $response->json('hits');
+            //             $imageUrl = $hits[0]['webformatURL'] ?? null;
+            //             if ($imageUrl) {
+            //                 $upload = Cloudinary::uploadApi()->upload($imageUrl, [
+            //                     'folder' => 'petshop/produk'
+            //                 ]);
+            //                 $cloudinaryUrl = $upload['secure_url'] ?? null;
+            //                 if ($cloudinaryUrl) {
+            //                     $produk->update(['gambar_utama' => $cloudinaryUrl]);
+            //                 }
+            //             }
+            //         } catch (\Exception $e) {
+            //             $this->command->warn('Gagal upload gambar untuk produk ' . $produk->nama_produk . ': ' . $e->getMessage());
+            //         }
+            //     }
+            //     $produkList = $produkList->merge($produks);
+            // }
+            // $this->command->info('Produks dibuat dan gambar diupload.');
+
+            // Jalankan seeder custom (PetShopSeeder) agar produk kucing saja yang masuk
+            $this->call(\Database\Seeders\PetShopSeeder::class);
 
             // 4. BUAT DATA PESANAN (LOGIKA PALING KOMPLEKS)
             // ===========================================
             $this->command->info('Membuat Pesanan dan item-itemnya...');
             // Pastikan pesanan dibuat oleh user dengan role pelanggan (user)
             $pelangganUserIds = $pelangganUsers->pluck('id')->toArray();
+
+            $produkList = \App\Models\Produk::all();
 
             Pesanan::factory(25)->create([
                 'user_id' => function () use ($pelangganUserIds) {
