@@ -27,6 +27,9 @@ use App\Http\Controllers\Api\KonsultasiController;
 // Endpoint untuk mendapatkan daftar kategori Pets
 Route::get('/kategori', [ProdukController::class, 'daftarKategori'])->name('api.kategori.index');
 
+// Endpoint untuk mendapatkan daftar dokter (Publik)
+Route::get('/dokters', [\App\Http\Controllers\Api\DokterController::class, 'index']);
+
 // Endpoint untuk mendapatkan daftar Pets
 Route::get('/produks', [ProdukController::class, 'index'])->name('api.produks.index');
 // Endpoint untuk mendapatkan informasi Pet berdasarkan slug
