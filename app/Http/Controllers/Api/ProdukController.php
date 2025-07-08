@@ -70,12 +70,14 @@ class ProdukController extends Controller
 
     /**
      * Menampilkan detail satu Produk.
-     * GET /api/produks/{produk}
+     * GET /api/produks/{slug}
      */
-    public function show(Produk $produk)
+    public function show($slug)
     {
-        $produk->loadMissing('kategoriProduk');
-
+        $produk = Produk::where('slug', $slug)->with('kategoriProduk')->first();
+        if (!$produk) {
+            return response()->json(['message' => 'Not Found'], 404);
+        }
         return new ProdukResource($produk);
     }
 
