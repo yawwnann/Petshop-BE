@@ -32,9 +32,6 @@ class KategoriProdukResource extends Resource
                 Forms\Components\Textarea::make('deskripsi')
                     ->nullable()
                     ->columnSpanFull(),
-                Forms\Components\TextInput::make('icon')
-                    ->label('Icon (emoji)')
-                    ->maxLength(10),
             ]);
     }
 
@@ -44,7 +41,6 @@ class KategoriProdukResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('nama_kategori')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('slug'),
-                Tables\Columns\TextColumn::make('icon')->label('Icon'),
                 Tables\Columns\TextColumn::make('produks_count')->counts('produks')->label('Jumlah Produk')->sortable(),
                 Tables\Columns\TextColumn::make('created_at')->dateTime()->sortable()->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')->dateTime()->sortable()->toggleable(isToggledHiddenByDefault: true),
