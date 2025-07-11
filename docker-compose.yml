@@ -26,7 +26,7 @@ services:
         image: nginx:alpine
         container_name: petshop-web
         ports:
-            - "8080:80"
+            - "9000:80"
         volumes:
             - ./:/var/www
             - ./docker/nginx.conf:/etc/nginx/conf.d/default.conf
