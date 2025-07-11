@@ -96,16 +96,12 @@ class Produk extends Model
                     ]);
                     return $this->gambar_utama;
                 }
-                $url = cloudinary()->image($this->gambar_utama)
-                    ->secure()
+                // Perbaiki di sini: gunakan Cloudinary instance dan image()->toUrl()
+                $cloudinary = app(\Cloudinary\Cloudinary::class);
+                return $cloudinary->image($this->gambar_utama)
                     ->format('auto')
                     ->quality('auto')
                     ->toUrl();
-                \Log::info('Accessor: URL Cloudinary berhasil dibuat', [
-                    'public_id' => $this->gambar_utama,
-                    'url' => $url,
-                ]);
-                return $url;
             } catch (\Exception $e) {
                 \Log::error("Accessor: Gagal generate Cloudinary URL untuk produk ID {$this->id}, public ID: {$this->gambar_utama}. Error: " . $e->getMessage());
                 return null;
