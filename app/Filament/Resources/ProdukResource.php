@@ -29,7 +29,9 @@ class ProdukResource extends Resource
                     ->required(),
                 Forms\Components\TextInput::make('nama_produk')
                     ->label('Nama Produk')
-                    ->required(),
+                    ->required()
+                    ->reactive()
+                    ->afterStateUpdated(fn($state, callable $set) => $set('slug', \Str::slug($state))),
                 Forms\Components\TextInput::make('slug')
                     ->label('Slug')
                     ->required(),
@@ -52,8 +54,14 @@ class ProdukResource extends Resource
                         'Habis' => 'Habis',
                     ])
                     ->required(),
-                Forms\Components\TextInput::make('gambar_utama')
-                    ->label('Gambar'),
+                Forms\Components\FileUpload::make('gambar_utama')
+                    ->label('Gambar')
+                    ->image()
+                    ->disk('cloudinary')
+                    ->directory('produk')
+                    ->maxSize(1024)
+                    ->helperText('Ukuran gambar maksimal 1MB')
+                    ->required(),
                 Forms\Components\DatePicker::make('expired')
                     ->label('Expired'),
                 Forms\Components\Textarea::make('deskripsi')
@@ -72,7 +80,8 @@ class ProdukResource extends Resource
                 Tables\Columns\TextColumn::make('stok')->label('Stok'),
 
                 Tables\Columns\TextColumn::make('expired')->label('Expired'),
-                Tables\Columns\ImageColumn::make('gambar_utama')->label('Gambar'),
+                Tables\Columns\ImageColumn::make('gambar_utama_url')
+                    ->label('Gambar'),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('kategori_produk_id')

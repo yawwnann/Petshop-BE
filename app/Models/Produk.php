@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Support\Facades\Log;
+use function CloudinaryLabs\CloudinaryLaravel\cloudinary_url;
 
 /**
  * @property int $id
@@ -84,21 +85,33 @@ class Produk extends Model
     // Accessor untuk mendapatkan URL gambar utama yang sudah di-transformasi oleh Cloudinary
     public function getGambarUtamaUrlAttribute(): ?string
     {
+        \Log::info('Akses accessor getGambarUtamaUrlAttribute', [
+            'gambar_utama' => $this->gambar_utama,
+        ]);
         if ($this->gambar_utama) {
             try {
                 if (Str::startsWith($this->gambar_utama, ['http://', 'https://'])) {
+                    \Log::info('Accessor: gambar_utama sudah berupa URL', [
+                        'url' => $this->gambar_utama,
+                    ]);
                     return $this->gambar_utama;
                 }
-                return Cloudinary::url($this->gambar_utama, [
-                    'secure' => true,
-                    'quality' => 'auto',
-                    'fetch_format' => 'auto'
+                $url = cloudinary()->image($this->gambar_utama)
+                    ->secure()
+                    ->format('auto')
+                    ->quality('auto')
+                    ->toUrl();
+                \Log::info('Accessor: URL Cloudinary berhasil dibuat', [
+                    'public_id' => $this->gambar_utama,
+                    'url' => $url,
                 ]);
+                return $url;
             } catch (\Exception $e) {
-                Log::error("Failed to generate Cloudinary URL for produk ID {$this->id}, public ID: {$this->gambar_utama}. Error: " . $e->getMessage());
+                \Log::error("Accessor: Gagal generate Cloudinary URL untuk produk ID {$this->id}, public ID: {$this->gambar_utama}. Error: " . $e->getMessage());
                 return null;
             }
         }
+        \Log::warning('Accessor: gambar_utama kosong');
         return null;
     }
 

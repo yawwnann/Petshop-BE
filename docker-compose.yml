@@ -1,0 +1,51 @@
+version: "3.8"
+
+services:
+    app:
+        image: laravelsail/php83-composer
+        container_name: petshop-app
+        working_dir: /var/www
+        volumes:
+            - ./:/var/www
+            - ./storage:/var/www/storage
+        environment:
+            - APP_ENV=local
+            - APP_DEBUG=true
+            - APP_KEY=base64:ISI_KEY_DISINI
+            - DB_HOST=db
+            - DB_DATABASE=petshop
+            - DB_USERNAME=petshop
+            - DB_PASSWORD=petshop
+            - CLOUDINARY_CLOUD_NAME=dm3icigfr
+            - CLOUDINARY_API_KEY=your_cloudinary_api_key
+            - CLOUDINARY_API_SECRET=your_cloudinary_api_secret
+        depends_on:
+            - db
+
+    web:
+        image: nginx:alpine
+        container_name: petshop-web
+        ports:
+            - "8080:80"
+        volumes:
+            - ./:/var/www
+            - ./docker/nginx.conf:/etc/nginx/conf.d/default.conf
+        depends_on:
+            - app
+
+    db:
+        image: mysql:8.0
+        container_name: petshop-db
+        restart: unless-stopped
+        environment:
+            MYSQL_DATABASE: petshop
+            MYSQL_USER: petshop
+            MYSQL_PASSWORD: petshop
+            MYSQL_ROOT_PASSWORD: root
+        ports:
+            - "33060:3306"
+        volumes:
+            - dbdata:/var/lib/mysql
+
+volumes:
+    dbdata:
