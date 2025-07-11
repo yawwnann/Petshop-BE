@@ -82,6 +82,35 @@ class ProdukController extends Controller
     }
 
     /**
+     * Upload gambar produk ke Cloudinary (public, tanpa auth)
+     * POST /api/produk-upload-gambar
+     */
+    public function uploadGambar(Request $request)
+    {
+        $request->validate([
+            'gambar' => 'required|image|max:2048', // Maks 2MB
+        ]);
+        $file = $request->file('gambar');
+        try {
+            $upload = \CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary::upload($file->getRealPath(), [
+                'folder' => 'produk',
+                'resource_type' => 'image',
+            ]);
+            return response()->json([
+                'success' => true,
+                'public_id' => $upload->getPublicId(),
+                'url' => $upload->getSecurePath(),
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Gagal upload gambar',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    /**
      * Menampilkan daftar kategori Produk.
      * GET /api/produks/kategori
      */

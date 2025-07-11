@@ -80,6 +80,7 @@ Route::middleware('auth:api')->group(function () {
 
 });
 
+Route::post('/produk-upload-gambar', [\App\Http\Controllers\Api\ProdukController::class, 'uploadGambar']);
 
 // Route fallback jika endpoint API tidak ditemukan (opsional)
 // Jika endpoint yang diminta tidak ada, akan memberikan respons error 404
