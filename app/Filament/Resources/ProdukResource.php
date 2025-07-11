@@ -31,10 +31,14 @@ class ProdukResource extends Resource
                     ->label('Nama Produk')
                     ->required()
                     ->reactive()
-                    ->afterStateUpdated(fn($state, callable $set) => $set('slug', \Str::slug($state))),
+                    ->afterStateUpdated(
+                        fn($state, callable $set, callable $get) =>
+                        empty($get('slug')) ? $set('slug', \Str::slug($state)) : null
+                    ),
                 Forms\Components\TextInput::make('slug')
                     ->label('Slug')
-                    ->required(),
+                    ->required()
+                    ->helperText('Slug otomatis terisi setelah mengisi nama, bisa diedit manual.'),
                 Forms\Components\TextInput::make('merk')
                     ->label('Merk'),
                 Forms\Components\TextInput::make('berat_volume')
