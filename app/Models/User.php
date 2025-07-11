@@ -117,6 +117,11 @@ class User extends Authenticatable implements JWTSubject
     // Semua user bisa akses Filament admin
     public function canAccessPanel(): bool
     {
+        \Log::info('[DEBUG] canAccessPanel dipanggil', [
+            'user_id' => $this->id,
+            'email' => $this->email,
+            'is_authenticated' => \Auth::check(),
+        ]);
         return true;
     }
 }
