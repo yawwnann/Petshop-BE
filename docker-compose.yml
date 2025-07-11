@@ -21,6 +21,13 @@ services:
             - CLOUDINARY_API_SECRET=your_cloudinary_api_secret
         depends_on:
             - db
+        command: >
+            bash -c "php artisan config:clear && \
+            php artisan cache:clear && \
+            php artisan route:clear && \
+            php artisan view:clear && \
+            php artisan optimize:clear && \
+            php-fpm"
 
     web:
         image: nginx:alpine
