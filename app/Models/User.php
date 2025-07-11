@@ -113,4 +113,10 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
+
+    // Semua user bisa akses Filament admin
+    public function canAccessPanel(): bool
+    {
+        return true;
+    }
 }
