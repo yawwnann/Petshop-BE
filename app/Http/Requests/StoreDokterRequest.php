@@ -21,9 +21,12 @@ class StoreDokterRequest extends FormRequest
      */
     public function rules(): array
     {
+        $dokterId = $this->route('dokter') instanceof \App\Models\Dokter
+            ? $this->route('dokter')->id
+            : $this->route('dokter');
         return [
             'nama' => 'required|string|max:255',
-            'email' => 'required|email|unique:dokters,email,' . $this->route('dokter'),
+            'email' => 'required|email|unique:dokters,email,' . $dokterId,
             'spesialisasi' => 'required|string|max:255',
             'no_str' => 'required|numeric',
             'telepon' => 'required|numeric',
