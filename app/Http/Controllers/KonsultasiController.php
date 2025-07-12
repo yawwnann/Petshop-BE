@@ -61,8 +61,8 @@ class KonsultasiController extends Controller
             'dokter_id' => 'required|exists:dokters,id',
             'tanggal' => 'required|date',
             'waktu' => 'required',
-            'keluhan' => 'required|string|max:1000',
-            'status' => 'required|in:Menunggu,Diterima,Ditolak,Selesai',
+            'catatan' => 'required|string|max:1000',
+            'status' => 'required|in:pending,diterima,ditolak,selesai',
         ]);
 
         if ($validator->fails()) {
@@ -106,8 +106,8 @@ class KonsultasiController extends Controller
             'dokter_id' => 'required|exists:dokters,id',
             'tanggal' => 'required|date',
             'waktu' => 'required',
-            'keluhan' => 'required|string|max:1000',
-            'status' => 'required|in:Menunggu,Diterima,Ditolak,Selesai',
+            'catatan' => 'required|string|max:1000',
+            'status' => 'required|in:pending,diterima,ditolak,selesai',
         ]);
 
         if ($validator->fails()) {
