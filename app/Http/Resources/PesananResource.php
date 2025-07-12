@@ -27,12 +27,12 @@ class PesananResource extends JsonResource
 
             'items' => $this->whenLoaded('items', function () {
                 return $this->items->map(function ($item) {
-                    $pet = $item->pet;
+                    $produk = $item->produk;
 
-                    if (!$pet) {
+                    if (!$produk) {
                         return [
                             'id' => $item->id,
-                            'nama_pet' => 'Produk Tidak Ditemukan',
+                            'nama_produk' => 'Produk Tidak Ditemukan',
                             'gambar_utama_url' => url('/images/placeholder-product.png'),
                             'jumlah' => $item->jumlah,
                             'harga_saat_pesanan' => $item->harga_saat_pesanan,
@@ -42,13 +42,13 @@ class PesananResource extends JsonResource
 
                     return [
                         'id' => $item->id,
-                        'nama_pet' => $pet->nama_pet,
-                        'slug' => $pet->slug,
-                        'deskripsi' => $pet->deskripsi,
-                        'harga' => $pet->harga,
-                        'stok' => $pet->stok,
-                        'kategori_pet' => $pet->kategoriPet,
-                        'gambar_utama_url' => $pet->gambar_utama_url,
+                        'nama_produk' => $produk->nama_produk,
+                        'slug' => $produk->slug,
+                        'deskripsi' => $produk->deskripsi,
+                        'harga' => $produk->harga,
+                        'stok' => $produk->stok,
+                        'kategori_produk' => $produk->kategoriProduk,
+                        'gambar_utama_url' => $produk->gambar_utama_url,
                         'jumlah' => $item->jumlah,
                         'harga_saat_pesanan' => $item->harga_saat_pesanan,
                     ];
