@@ -18,12 +18,16 @@ class KeranjangController extends Controller
         $items = KeranjangItem::with('produk')
             ->where('user_id', $user->id)
             ->get();
-        // Ubah produk menjadi ProdukResource agar gambar_utama_url selalu ada
-        $items = $items->map(function ($item) {
-            $item->produk = $item->produk ? new ProdukResource($item->produk) : null;
-            return $item;
+        // Pastikan response konsisten: setiap produk pakai ProdukResource (gambar_utama_url selalu ada)
+        $result = $items->map(function ($item) {
+            return [
+                'id' => $item->id,
+                'produk_id' => $item->produk_id,
+                'quantity' => $item->quantity,
+                'produk' => $item->produk ? new ProdukResource($item->produk) : null,
+            ];
         });
-        return response()->json($items);
+        return response()->json($result);
     }
 
     // Update item keranjang (tambah/ubah jumlah)
