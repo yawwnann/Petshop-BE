@@ -83,29 +83,29 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="hasil_konsultasi" class="form-label text-dark dark:text-light">Hasil Konsultasi</label>
-                    <textarea name="hasil_konsultasi" id="hasil_konsultasi" rows="4"
-                        class="form-control @error('hasil_konsultasi') is-invalid @enderror"
-                        placeholder="Masukkan hasil konsultasi...">{{ old('hasil_konsultasi', $konsultasi->hasil_konsultasi) }}</textarea>
-                    @error('hasil_konsultasi')
+                    <label for="status" class="form-label text-dark dark:text-light">Status</label>
+                    <select name="status" id="status" class="form-select @error('status') is-invalid @enderror" required>
+                        <option value="">Pilih Status</option>
+                        <option value="pending" {{ old('status', $konsultasi->status) == 'pending' ? 'selected' : '' }}>
+                            Pending</option>
+                        <option value="diterima" {{ old('status', $konsultasi->status) == 'diterima' ? 'selected' : '' }}>
+                            Diterima</option>
+                        <option value="ditolak" {{ old('status', $konsultasi->status) == 'ditolak' ? 'selected' : '' }}>
+                            Ditolak</option>
+                        <option value="selesai" {{ old('status', $konsultasi->status) == 'selesai' ? 'selected' : '' }}>
+                            Selesai</option>
+                    </select>
+                    @error('status')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
 
                 <div class="mb-3">
-                    <label for="status" class="form-label text-dark dark:text-light">Status</label>
-                    <select name="status" id="status" class="form-select @error('status') is-invalid @enderror" required>
-                        <option value="">Pilih Status</option>
-                        <option value="Menunggu" {{ old('status', $konsultasi->status) == 'Menunggu' ? 'selected' : '' }}>
-                            Menunggu</option>
-                        <option value="Diterima" {{ old('status', $konsultasi->status) == 'Diterima' ? 'selected' : '' }}>
-                            Diterima</option>
-                        <option value="Ditolak" {{ old('status', $konsultasi->status) == 'Ditolak' ? 'selected' : '' }}>
-                            Ditolak</option>
-                        <option value="Selesai" {{ old('status', $konsultasi->status) == 'Selesai' ? 'selected' : '' }}>
-                            Selesai</option>
-                    </select>
-                    @error('status')
+                    <label for="hasil_konsultasi" class="form-label text-dark dark:text-light">Hasil Konsultasi</label>
+                    <textarea name="hasil_konsultasi" id="hasil_konsultasi" rows="4"
+                        class="form-control @error('hasil_konsultasi') is-invalid @enderror"
+                        placeholder="Masukkan hasil konsultasi...">{{ old('hasil_konsultasi', $konsultasi->hasil_konsultasi) }}</textarea>
+                    @error('hasil_konsultasi')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
@@ -119,4 +119,20 @@
             </form>
         </div>
     </div>
+    <script>
+        // Wajibkan hasil_konsultasi jika status selesai
+        document.addEventListener('DOMContentLoaded',function() {
+            const statusSelect=document.getElementById('status');
+            const hasilTextarea=document.getElementById('hasil_konsultasi');
+            function checkStatus() {
+                if(statusSelect.value==='selesai') {
+                    hasilTextarea.setAttribute('required','required');
+                } else {
+                    hasilTextarea.removeAttribute('required');
+                }
+            }
+            statusSelect.addEventListener('change',checkStatus);
+            checkStatus(); // initial
+        });
+    </script>
 @endsection
