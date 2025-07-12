@@ -72,11 +72,22 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="keluhan" class="form-label text-dark dark:text-light">Keluhan</label>
-                    <textarea name="keluhan" id="keluhan" rows="4"
-                        class="form-control @error('keluhan') is-invalid @enderror" placeholder="Masukkan keluhan pasien..."
-                        required>{{ old('keluhan', $konsultasi->keluhan) }}</textarea>
-                    @error('keluhan')
+                    <label for="catatan" class="form-label text-dark dark:text-light">Catatan</label>
+                    <textarea name="catatan" id="catatan" rows="4"
+                        class="form-control @error('catatan') is-invalid @enderror"
+                        placeholder="Masukkan catatan/keluhan pasien..."
+                        required>{{ old('catatan', $konsultasi->catatan) }}</textarea>
+                    @error('catatan')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="mb-3">
+                    <label for="hasil_konsultasi" class="form-label text-dark dark:text-light">Hasil Konsultasi</label>
+                    <textarea name="hasil_konsultasi" id="hasil_konsultasi" rows="4"
+                        class="form-control @error('hasil_konsultasi') is-invalid @enderror"
+                        placeholder="Masukkan hasil konsultasi...">{{ old('hasil_konsultasi', $konsultasi->hasil_konsultasi) }}</textarea>
+                    @error('hasil_konsultasi')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
