@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
     return view('welcome');
@@ -29,5 +30,13 @@ Route::resource('dokter', App\Http\Controllers\DokterController::class)->middlew
 
 // Konsultasi CRUD
 Route::resource('konsultasi', App\Http\Controllers\KonsultasiController::class)->middleware(['auth']);
+
+// Pastikan route logout mengarahkan ke login setelah logout
+Route::post('/logout', function () {
+    Auth::logout();
+    request()->session()->invalidate();
+    request()->session()->regenerateToken();
+    return redirect('/login');
+})->name('logout');
 
 require __DIR__ . '/auth.php';

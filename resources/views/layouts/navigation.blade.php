@@ -14,39 +14,37 @@
                 <li class="nav-item">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')"
                         class="nav-link px-2 py-1">
-                        <i class="bi bi-house-door text-secondary"></i> <span
-                            class="d-none d-md-inline">Dashboard</span>
+                        <i class="bi bi-house-door text-secondary"></i> <span>Dashboard</span>
                     </x-nav-link>
                 </li>
                 <li class="nav-item">
                     <x-nav-link :href="route('produk.index')" :active="request()->routeIs('produk.*')"
                         class="nav-link px-2 py-1">
-                        <i class="bi bi-box text-secondary"></i> <span class="d-none d-md-inline">Produk</span>
+                        <i class="bi bi-box text-secondary"></i> <span>Produk</span>
                     </x-nav-link>
                 </li>
                 <li class="nav-item">
                     <x-nav-link :href="route('kategori-produk.index')" :active="request()->routeIs('kategori-produk.*')"
                         class="nav-link px-2 py-1">
-                        <i class="bi bi-tags text-secondary"></i> <span class="d-none d-md-inline">Kategori</span>
+                        <i class="bi bi-tags text-secondary"></i> <span>Kategori</span>
                     </x-nav-link>
                 </li>
                 <li class="nav-item">
                     <x-nav-link :href="route('pesanan.index')" :active="request()->routeIs('pesanan.*')"
                         class="nav-link px-2 py-1">
-                        <i class="bi bi-cart text-secondary"></i> <span class="d-none d-md-inline">Pesanan</span>
+                        <i class="bi bi-cart text-secondary"></i> <span>Pesanan</span>
                     </x-nav-link>
                 </li>
                 <li class="nav-item">
                     <x-nav-link :href="route('dokter.index')" :active="request()->routeIs('dokter.*')"
                         class="nav-link px-2 py-1">
-                        <i class="bi bi-person-badge text-secondary"></i> <span class="d-none d-md-inline">Dokter</span>
+                        <i class="bi bi-person-badge text-secondary"></i> <span>Dokter</span>
                     </x-nav-link>
                 </li>
                 <li class="nav-item">
                     <x-nav-link :href="route('konsultasi.index')" :active="request()->routeIs('konsultasi.*')"
                         class="nav-link px-2 py-1">
-                        <i class="bi bi-chat-dots text-secondary"></i> <span
-                            class="d-none d-md-inline">Konsultasi</span>
+                        <i class="bi bi-chat-dots text-secondary"></i> <span>Konsultasi</span>
                     </x-nav-link>
                 </li>
             </ul>
@@ -186,5 +184,45 @@
         .navbar-nav .nav-link i {
             margin-right: 0.5rem;
         }
+
+        /* Perbaiki warna teks navbar di mobile */
+        .navbar-nav .nav-link,
+        .navbar-brand {
+            color: #181a1b !important;
+        }
+
+        body.dark .navbar-nav .nav-link,
+        body.dark .navbar-brand {
+            color: #f8f9fa !important;
+        }
+
+        body.dark .navbar-nav .nav-link i {
+            color: #f8f9fa !important;
+        }
+
+        .navbar-nav .nav-link i {
+            color: #495057 !important;
+        }
+
+        .dropdown-menu {
+            color: #181a1b;
+        }
+
+        body.dark .dropdown-menu {
+            color: #f8f9fa;
+        }
+    }
+
+    /* Hamburger menu (navbar-toggler-icon) dark mode fix */
+    .navbar-toggler {
+        border-color: #adb5bd;
+    }
+
+    .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(33,37,41,0.7)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+
+    body.dark .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(248,249,250,0.95)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
     }
 </style>

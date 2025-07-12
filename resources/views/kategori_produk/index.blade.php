@@ -12,45 +12,57 @@
             </div>
             <div class="card">
                 <div class="card-body p-0">
-                    <table class="table table-hover mb-0">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Nama Kategori</th>
-                                <th>Slug</th>
-                                <th>Deskripsi</th>
-
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @forelse($kategoris as $kategori)
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead>
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $kategori->nama_kategori }}</td>
-                                    <td>{{ $kategori->slug }}</td>
-                                    <td>{{ $kategori->deskripsi }}</td>
+                                    <th>#</th>
+                                    <th>Nama Kategori</th>
+                                    <th>Slug</th>
+                                    <th>Deskripsi</th>
 
-                                    <td>
-                                        <a href="{{ route('kategori-produk.edit', $kategori) }}"
-                                            class="btn btn-sm btn-warning">Edit</a>
-                                        <form action="{{ route('kategori-produk.destroy', $kategori) }}" method="POST"
-                                            class="d-inline" onsubmit="return confirm('Yakin hapus kategori ini?')">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button class="btn btn-sm btn-danger">Hapus</button>
-                                        </form>
-                                    </td>
+                                    <th>Aksi</th>
                                 </tr>
-                            @empty
-                                <tr>
-                                    <td colspan="6" class="text-center">Belum ada kategori.</td>
-                                </tr>
-                            @endforelse
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @forelse($kategoris as $kategori)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $kategori->nama_kategori }}</td>
+                                        <td>{{ $kategori->slug }}</td>
+                                        <td>{{ $kategori->deskripsi }}</td>
+
+                                        <td>
+                                            <a href="{{ route('kategori-produk.edit', $kategori) }}"
+                                                class="btn btn-sm btn-warning">Edit</a>
+                                            <form action="{{ route('kategori-produk.destroy', $kategori) }}" method="POST"
+                                                class="d-inline" onsubmit="return confirm('Yakin hapus kategori ini?')">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="btn btn-sm btn-danger">Hapus</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="6" class="text-center">Belum ada kategori.</td>
+                                    </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 @endsection
+
+@push('styles')
+    <style>
+        @media (max-width: 576px) {
+            .table {
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+@endpush

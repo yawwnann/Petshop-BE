@@ -19,7 +19,8 @@
                         <option value="">Semua</option>
                         @foreach($spesialisasiList as $spesialisasi)
                             <option value="{{ $spesialisasi }}" @selected(request('spesialisasi') == $spesialisasi)>
-                                {{ $spesialisasi }}</option>
+                                {{ $spesialisasi }}
+                            </option>
                         @endforeach
                     </select>
                 </div>
@@ -79,3 +80,13 @@
         </div>
     </div>
 @endsection
+
+@push('styles')
+    <style>
+        @media (max-width: 576px) {
+            .table {
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+@endpush
