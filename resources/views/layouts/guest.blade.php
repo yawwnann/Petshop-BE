@@ -20,17 +20,17 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 
-<body class="font-sans text-gray-900 antialiased">
-    <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100 dark:bg-gray-900">
-        <div>
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
-        </div>
-
-        <div
-            class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg">
-            {{ $slot }}
+<body class="font-sans text-gray-900 antialiased bg-light dark:bg-dark">
+    <div class="container min-vh-100 d-flex align-items-center justify-content-center">
+        <div class="row w-100">
+            <div class="col-12 col-sm-8 col-md-6 col-lg-4 mx-auto">
+                <!-- Logo dihapus agar tampilan lebih clean -->
+                <div class="card shadow-sm border-0">
+                    <div class="card-body p-4">
+                        {{ $slot }}
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </body>
