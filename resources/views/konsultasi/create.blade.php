@@ -69,28 +69,40 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="keluhan" class="form-label text-dark dark:text-light">Keluhan</label>
-                    <textarea name="keluhan" id="keluhan" rows="4"
-                        class="form-control @error('keluhan') is-invalid @enderror" placeholder="Masukkan keluhan pasien..."
-                        required>{{ old('keluhan') }}</textarea>
-                    @error('keluhan')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
-
-                <div class="mb-3">
                     <label for="status" class="form-label text-dark dark:text-light">Status</label>
                     <select name="status" id="status" class="form-select @error('status') is-invalid @enderror" required>
                         <option value="">Pilih Status</option>
                         <option value="Menunggu" {{ old('status') == 'Menunggu' ? 'selected' : '' }}>Menunggu</option>
                         <option value="Diterima" {{ old('status') == 'Diterima' ? 'selected' : '' }}>Diterima</option>
-                        <option value="Ditolak" {{ old('status') == 'Ditolak' ? 'selected' : '' }}>Ditolak</option>
+                        <option value=" Ditolak" {{ old('status') == 'Ditolak' ? 'selected' : '' }}>Ditolak</option>
                         <option value="Selesai" {{ old('status') == 'Selesai' ? 'selected' : '' }}>Selesai</option>
                     </select>
                     @error('status')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
+
+                <div class="mb-3">
+                    <label for="catatan" class="form-label text-dark dark:text-light">Catatan</label>
+                    <textarea name="catatan" id="catatan" rows="4"
+                        class="form-control @error('catatan') is-invalid @enderror"
+                        placeholder="Masukkan catatan/keluhan pasien..." required>{{ old('catatan') }}</textarea>
+                    @error('catatan')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="mb-3">
+                    <label for="hasil_konsultasi" class="form-label text-dark dark:text-light">Hasil Konsultasi</label>
+                    <textarea name="hasil_konsultasi" id="hasil_konsultasi" rows="4"
+                        class="form-control @error('hasil_konsultasi') is-invalid @enderror"
+                        placeholder="Masukkan hasil konsultasi...">{{ old('hasil_konsultasi') }}</textarea>
+                    @error('hasil_konsultasi')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+
+
 
                 <div class="d-flex justify-content-end gap-2">
                     <a href="{{ route('konsultasi.index') }}" class="btn btn-secondary">Batal</a>

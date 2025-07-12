@@ -49,17 +49,21 @@
                 <table class="table table-hover align-middle mb-0">
                     <thead>
                         <tr>
+                            <th>ID</th>
                             <th>User</th>
                             <th>Dokter</th>
                             <th>Tanggal</th>
                             <th>Waktu</th>
                             <th>Status</th>
+                            <th>Catatan</th>
+                            <th>Hasil Konsultasi</th>
                             <th class="text-center">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                         @forelse($konsultasis as $konsultasi)
                             <tr>
+                                <td>{{ $konsultasi->id }}</td>
                                 <td>{{ $konsultasi->user->name ?? '-' }}</td>
                                 <td>{{ $konsultasi->dokter->nama ?? '-' }}</td>
                                 <td>{{ $konsultasi->tanggal }}</td>
@@ -70,6 +74,8 @@
                                         {{ $konsultasi->status }}
                                     </span>
                                 </td>
+                                <td>{{ $konsultasi->catatan ?? '-' }}</td>
+                                <td>{{ $konsultasi->hasil_konsultasi ?? '-' }}</td>
                                 <td class="text-center">
                                     <a href="{{ route('konsultasi.show', $konsultasi) }}" class="btn btn-sm btn-info"><i
                                             class="bi bi-eye"></i></a>
@@ -84,7 +90,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="6" class="text-center text-muted">Tidak ada data konsultasi.</td>
+                                <td colspan="9" class="text-center text-muted">Tidak ada data konsultasi.</td>
                             </tr>
                         @endforelse
                     </tbody>
