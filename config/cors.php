@@ -24,10 +24,7 @@ return [
     | **INI YANG PALING PENTING.** '*' mengizinkan semua (TIDAK AMAN!).
     | Gunakan URL frontend spesifik, ambil dari .env.
     */
-    'allowed_origins' => [
-        'http://localhost:5173',
-        'http://localhost:5174',
-    ],
+    'allowed_origins' => ['*'],
 
     /*
     |--------------------------------------------------------------------------
