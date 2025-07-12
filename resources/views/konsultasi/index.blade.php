@@ -62,32 +62,35 @@
                     </thead>
                     <tbody>
                         @forelse($konsultasis as $konsultasi)
-                            <tr>
-                                <td>{{ $konsultasi->id }}</td>
-                                <td>{{ $konsultasi->user->name ?? '-' }}</td>
-                                <td>{{ $konsultasi->dokter->nama ?? '-' }}</td>
-                                <td>{{ $konsultasi->tanggal }}</td>
-                                <td>{{ $konsultasi->waktu }}</td>
-                                <td>
-                                    <span
-                                        class="badge bg-{{ $konsultasi->status == 'Selesai' ? 'success' : ($konsultasi->status == 'Diterima' ? 'primary' : ($konsultasi->status == 'Ditolak' ? 'danger' : 'warning')) }}">
-                                        {{ $konsultasi->status }}
-                                    </span>
-                                </td>
-                                <td>{{ $konsultasi->catatan ?? '-' }}</td>
-                                <td>{{ $konsultasi->hasil_konsultasi ?? '-' }}</td>
-                                <td class="text-center">
-                                    <a href="{{ route('konsultasi.show', $konsultasi) }}" class="btn btn-sm btn-info"><i
-                                            class="bi bi-eye"></i></a>
-                                    <a href="{{ route('konsultasi.edit', $konsultasi) }}" class="btn btn-sm btn-warning"><i
-                                            class="bi bi-pencil"></i></a>
-                                    <form action="{{ route('konsultasi.destroy', $konsultasi) }}" method="POST" class="d-inline"
-                                        onsubmit="return confirm('Yakin hapus konsultasi ini?')">
-                                        @csrf @method('DELETE')
-                                        <button class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button>
-                                    </form>
-                                </td>
-                            </tr>
+                                        <tr>
+                                            <td>{{ $konsultasi->id }}</td>
+                                            <td>{{ $konsultasi->user->name ?? '-' }}</td>
+                                            <td>{{ $konsultasi->dokter->nama ?? '-' }}</td>
+                                            <td>{{ $konsultasi->tanggal }}</td>
+                                            <td>{{ $konsultasi->waktu }}</td>
+                                            <td>
+                                                <span class="badge bg-
+                                                                {{ $konsultasi->status == 'selesai' ? 'success' :
+                            ($konsultasi->status == 'diterima' ? 'primary' :
+                                ($konsultasi->status == 'ditolak' ? 'danger' :
+                                    ($konsultasi->status == 'pending' ? 'warning' : 'secondary'))) }}">
+                                                    {{ ucfirst($konsultasi->status) }}
+                                                </span>
+                                            </td>
+                                            <td>{{ $konsultasi->catatan ?? '-' }}</td>
+                                            <td>{{ $konsultasi->hasil_konsultasi ?? '-' }}</td>
+                                            <td class="text-center">
+                                                <a href="{{ route('konsultasi.show', $konsultasi) }}" class="btn btn-sm btn-info"><i
+                                                        class="bi bi-eye"></i></a>
+                                                <a href="{{ route('konsultasi.edit', $konsultasi) }}" class="btn btn-sm btn-warning"><i
+                                                        class="bi bi-pencil"></i></a>
+                                                <form action="{{ route('konsultasi.destroy', $konsultasi) }}" method="POST" class="d-inline"
+                                                    onsubmit="return confirm('Yakin hapus konsultasi ini?')">
+                                                    @csrf @method('DELETE')
+                                                    <button class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button>
+                                                </form>
+                                            </td>
+                                        </tr>
                         @empty
                             <tr>
                                 <td colspan="9" class="text-center text-muted">Tidak ada data konsultasi.</td>
