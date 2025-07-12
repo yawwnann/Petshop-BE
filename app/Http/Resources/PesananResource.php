@@ -33,7 +33,7 @@ class PesananResource extends JsonResource
                         return [
                             'id' => $item->id,
                             'nama_pet' => 'Produk Tidak Ditemukan',
-                            'gambar_utama_url' => null,
+                            'gambar_utama_url' => url('/images/placeholder-product.png'),
                             'jumlah' => $item->jumlah,
                             'harga_saat_pesanan' => $item->harga_saat_pesanan,
                             'is_deleted' => true,
