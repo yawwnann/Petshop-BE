@@ -37,7 +37,7 @@ class PesananApiController extends Controller
             'alamat_pengiriman' => 'required|string',
             'nomor_whatsapp' => 'required|string',
             'catatan' => 'nullable|string',
-            'metode_pembayaran' => 'nullable|string|in:transfer,qris',
+            'metode_pembayaran' => 'nullable|string|in:transfer,qris,cash',
             'items' => 'required|array|min:1',
             'items.*.produk_id' => 'required|exists:produks,id',
             'items.*.quantity' => 'required|integer|min:1',
