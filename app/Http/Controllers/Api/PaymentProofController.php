@@ -27,7 +27,7 @@ class PaymentProofController extends Controller
         try {
             $request->validate([
                 'payment_proof' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Maksimal 2MB
-                'payment_method' => 'nullable|string|in:transfer,qris',
+                'payment_method' => 'nullable|string|in:transfer,qris,cash',
             ]);
         } catch (ValidationException $e) {
             Log::warning("Validasi gagal untuk submitProof pesanan #" . ($pesanan->id ?? 'UNKNOWN') . ": ", $e->errors());
@@ -130,7 +130,19 @@ class PaymentProofController extends Controller
         $orderId = $pesanan->id ?? 'N/A';
         $totalAmount = $pesanan->total_harga ?? 0;
         $paymentMethod = $pesanan->metode_pembayaran ?? 'transfer';
-        $paymentMethodText = $paymentMethod === 'qris' ? 'QRIS' : 'Transfer Bank';
+
+        // Handle different payment methods for display
+        switch ($paymentMethod) {
+            case 'qris':
+                $paymentMethodText = 'QRIS';
+                break;
+            case 'cash':
+                $paymentMethodText = 'Cash';
+                break;
+            default:
+                $paymentMethodText = 'Transfer Bank';
+                break;
+        }
 
         // Opsi 1: Mengirim pesan teks dengan link ke gambar
         $captionTelegram = "🔔 **Bukti Pembayaran Baru Diterima!** 🔔\n\n";
