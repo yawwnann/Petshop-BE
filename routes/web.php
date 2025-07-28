@@ -22,9 +22,10 @@ Route::resource('kategori-produk', App\Http\Controllers\KategoriProdukController
 // Produk CRUD
 Route::resource('produk', App\Http\Controllers\ProdukController::class)->middleware(['auth']);
 
-// Pesanan CRUD
-Route::resource('pesanan', App\Http\Controllers\PesananController::class)->except(['create', 'store']);
-Route::get('/pesanan', [App\Http\Controllers\PesananController::class, 'index'])->name('pesanan.index');
+// Pesanan CRUD - this is fine as is
+Route::resource('pesanan', App\Http\Controllers\PesananController::class)
+    ->except(['create', 'store'])
+    ->middleware(['auth']);
 
 // Dokter CRUD
 Route::resource('dokter', App\Http\Controllers\DokterController::class)->middleware(['auth']);

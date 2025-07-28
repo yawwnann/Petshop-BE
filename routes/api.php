@@ -12,14 +12,16 @@ use App\Http\Controllers\Api\PesananApiController;
 use App\Http\Controllers\Api\PaymentProofController;
 use App\Http\Controllers\Api\UserProfileController;
 use App\Http\Controllers\Api\KonsultasiController;
+use App\Http\Controllers\Api\DokterController; // Pastikan ini diimpor
+use App\Http\Controllers\Api\KeranjangController; // Pastikan ini diimpor
 
 /*
 |--------------------------------------------------------------------------
 | API Routes
 |--------------------------------------------------------------------------
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "api" middleware group. Make something great!
+| Di sini Anda dapat mendaftarkan rute API untuk aplikasi Anda. Rute-rute ini
+| dimuat oleh RouteServiceProvider dan semuanya akan
+| ditetapkan ke grup middleware "api". Buatlah sesuatu yang hebat!
 |
 */
 
@@ -28,7 +30,7 @@ use App\Http\Controllers\Api\KonsultasiController;
 Route::get('/kategori', [ProdukController::class, 'daftarKategori'])->name('api.kategori.index');
 
 // Endpoint untuk mendapatkan daftar dokter (Publik)
-Route::get('/dokters', [\App\Http\Controllers\Api\DokterController::class, 'index']);
+Route::get('/dokters', [DokterController::class, 'index']);
 
 // Endpoint untuk mendapatkan daftar Pets
 Route::get('/produks', [ProdukController::class, 'index'])->name('api.produks.index');
@@ -52,7 +54,8 @@ Route::middleware('auth:api')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('api.logout');
     // Endpoint untuk mendapatkan data pengguna yang sedang login
     Route::get('/user', [AuthController::class, 'user'])->name('api.user');
-    // Endpoint untuk mendapatkan data profile pengguna (alias untuk /user)
+    // Endpoint untuk mendapatkan data profile pengguna (saat ini alias untuk /user)
+    // Pertimbangkan untuk mengarahkan ini ke UserProfileController jika ada logika profil yang lebih kompleks.
     Route::get('/profile', [AuthController::class, 'user'])->name('api.profile');
     // Endpoint untuk update foto profil pengguna
     Route::post('/user/profile-photo', [UserProfileController::class, 'updateProfilePhoto'])->name('user.photo.update');
@@ -62,7 +65,13 @@ Route::middleware('auth:api')->group(function () {
 
     // --- Manajemen Pesanan ---
     // Route resource API untuk pesanan (index, show, store, update, destroy)
-    Route::apiResource('pesanan', PesananApiController::class);
+    Route::apiResource('pesanan', PesananApiController::class)->names([
+        'index' => 'api.pesanan.index',
+        'show' => 'api.pesanan.show',
+        'store' => 'api.pesanan.store',
+        'update' => 'api.pesanan.update',
+        'destroy' => 'api.pesanan.destroy',
+    ]);
     // Route kustom untuk pesanan
     Route::post('/pesanan/{pesanan}/submit-payment-proof', [PaymentProofController::class, 'submitProof'])
         ->name('api.pesanan.submitProof');
@@ -73,18 +82,22 @@ Route::middleware('auth:api')->group(function () {
     Route::post('/konsultasi', [KonsultasiController::class, 'store']);
 
     // == API Endpoints Keranjang ==
-    Route::get('/keranjang', [\App\Http\Controllers\Api\KeranjangController::class, 'index']);
-    Route::put('/keranjang', [\App\Http\Controllers\Api\KeranjangController::class, 'update']);
-    Route::put('/keranjang/{id}', [\App\Http\Controllers\Api\KeranjangController::class, 'update']);
-    Route::delete('/keranjang/{id}', [\App\Http\Controllers\Api\KeranjangController::class, 'destroy']);
+    Route::get('/keranjang', [KeranjangController::class, 'index']);
+    // Perhatikan: Kedua rute PUT ini mengarah ke metode update yang sama.
+    // Pastikan metode update di KeranjangController dapat menangani kedua skenario (dengan/tanpa ID)
+    // atau pertimbangkan untuk membedakan rute ini jika fungsinya berbeda.
+    Route::put('/keranjang', [KeranjangController::class, 'update']);
+    Route::put('/keranjang/{id}', [KeranjangController::class, 'update']);
+    Route::delete('/keranjang/{id}', [KeranjangController::class, 'destroy']);
+
+    // --- Pengunggahan Gambar Produk ---
+    // Dipindahkan ke dalam grup 'auth:api' karena pengunggahan gambar biasanya memerlukan otentikasi.
+    Route::post('/produk-upload-gambar', [ProdukController::class, 'uploadGambar']);
 
 });
-
-Route::post('/produk-upload-gambar', [\App\Http\Controllers\Api\ProdukController::class, 'uploadGambar']);
 
 // Route fallback jika endpoint API tidak ditemukan (opsional)
 // Jika endpoint yang diminta tidak ada, akan memberikan respons error 404
 Route::fallback(function () {
     return response()->json(['message' => 'Endpoint tidak ditemukan.'], 404);
 });
-
