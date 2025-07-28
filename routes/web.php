@@ -24,6 +24,7 @@ Route::resource('produk', App\Http\Controllers\ProdukController::class)->middlew
 
 // Pesanan CRUD
 Route::resource('pesanan', App\Http\Controllers\PesananController::class)->except(['create', 'store']);
+Route::get('/pesanan', [App\Http\Controllers\PesananController::class, 'index'])->name('pesanan.index');
 
 // Dokter CRUD
 Route::resource('dokter', App\Http\Controllers\DokterController::class)->middleware(['auth']);
